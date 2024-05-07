@@ -37,7 +37,7 @@ const CancelButton = styled.TouchableOpacity`
 const ConfirmButton = styled.TouchableOpacity`
     padding: 10px 20px;
     border-radius: 5px;
-    background-color: #2ecc71;
+    background-color: #2196F3;
 `;
 
 const ButtonText = styled.Text`

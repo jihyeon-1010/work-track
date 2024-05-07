@@ -53,7 +53,7 @@ const EmployeeList = ({ member, selectionButtonPress, selectedUserName }) => {
     return (
         <Container>
             {/* 프로필 이미지 */}
-            <ProfilePicture source={{ uri: `${member.user ? member.user.profileUrl : member.profileUrl}` }} alt="Profile" />
+            <ProfilePicture source={{ uri: `${member.user ? member.user.profileUrl : member.profileUrl}?timestamp=${Date.now()}` }} alt="Profile" />
 
             {/* 회원 정보 */}
             <Info>

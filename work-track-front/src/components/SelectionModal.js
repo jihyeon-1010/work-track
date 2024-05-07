@@ -32,7 +32,7 @@ const CancelButton = styled.TouchableOpacity`
 `;
 
 const CancelButtonText = styled.Text`
-    color: ${({theme}) => theme.buttonTitle};
+    color: #666;
     font-weight: bold;
 `;
 

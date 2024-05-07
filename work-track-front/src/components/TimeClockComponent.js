@@ -52,7 +52,7 @@ const CheckTimeButton = styled.TouchableOpacity`
 `;
 
 const ButtonText = styled.Text`
-    color: #FFFFFF;
+    color: #666;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
@@ -65,7 +65,7 @@ const NoteButton = styled.TouchableOpacity`
 `;
 
 const NoteButtonText = styled.Text`
-    color: #666666;
+    color: #666;
     font-size: 16px;
     margin-left: 10px;
 `;
@@ -92,7 +92,7 @@ const SubtitleContainer = styled.TouchableOpacity`
 const SubtitleText = styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #666666;
+    color: #666;
 `;
 
 const TimeClockComponent = ({ navigation }) => {
@@ -255,10 +255,10 @@ const TimeClockComponent = ({ navigation }) => {
 
                 {/* 출퇴근 버튼 */}
                 <ButtonsRow>
-                    <CheckTimeButton onPress={handleCheckIn} style={{ backgroundColor: '#4682B4' }}>
+                    <CheckTimeButton onPress={handleCheckIn} style={{ backgroundColor: '#cfdfff' }}>
                         <ButtonText>출근</ButtonText>
                     </CheckTimeButton>
-                    <CheckTimeButton onPress={handleCheckOut} style={{ backgroundColor: '#4682B4' }}>
+                    <CheckTimeButton onPress={handleCheckOut} style={{ backgroundColor: '#cfdfff' }}>
                         <ButtonText>퇴근</ButtonText>
                     </CheckTimeButton>
                 </ButtonsRow>
@@ -273,7 +273,7 @@ const TimeClockComponent = ({ navigation }) => {
 
                 {/* 비고란 */}
                 <NoteButton onPress={toggleModal}>
-                    <MaterialIcons name="edit" size={20} color="#666666" />
+                    <MaterialIcons name="edit" size={20} color="#666" />
                     <NoteButtonText>특이사항 입력</NoteButtonText>
                 </NoteButton>
                 {notes && (
@@ -317,7 +317,7 @@ const TimeClockComponent = ({ navigation }) => {
                 <MaterialIcons
                     name="keyboard-arrow-right"
                     size={24}
-                    color="#666666"
+                    color="#666"
                 />
             </SubtitleContainer>
         </Container>

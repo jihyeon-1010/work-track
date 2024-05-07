@@ -7,7 +7,7 @@ const colors = {
     red: '#e84118',
     blue: '#3679f2',
     blue_main: '#11115e',
-    sky_blue: '#6fc3f7',
+    sky_blue: '#cfdfff',
 };
 
 export const theme = {

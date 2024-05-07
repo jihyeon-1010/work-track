@@ -9,5 +9,6 @@ import WorkAttendance from "./WorkAttendance";
 import DateCalendar from "./DateCalendar";
 import DeleteEmployee from "./DeleteEmployee";
 import EmployeeManagement from "./EmployeeManagement";
+import Department from "./Department";
 
-export { Login, Signup, MessengerRoomCreation, MessengerRoom, Messenger, Profile, Employee, WorkAttendance, DateCalendar, DeleteEmployee, EmployeeManagement };
+export { Login, Signup, MessengerRoomCreation, MessengerRoom, Messenger, Profile, Employee, WorkAttendance, DateCalendar, DeleteEmployee, EmployeeManagement, Department };

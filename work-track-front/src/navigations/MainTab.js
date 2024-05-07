@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { WorkAttendance, Messenger, Profile, EmployeeManagement } from '../screens';
+import { WorkAttendance, Messenger, Profile, EmployeeManagement, Department } from '../screens';
 import { ThemeContext } from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -60,6 +60,19 @@ const MainTab = ({ navigation, route }) => {
                         }),
                     tabBarLabel: '직원 관리',
                     headerTitle: '직원 관리'
+                }}
+            />
+            <Tab.Screen
+                name="Department"
+                component={Department}
+                options={{
+                    tabBarIcon: ({ focused }) =>
+                        TabBarIcon({
+                            focused,
+                            name: focused ? 'bookmark' : 'bookmark-border',
+                        }),
+                    tabBarLabel: '부서 관리',
+                    headerTitle: '부서 관리'
                 }}
             />
             <Tab.Screen
