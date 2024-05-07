@@ -29,16 +29,13 @@ public class Attendance {
         this.employeeId = employeeId;
         this.checkInTime = LocalTime.now();
         this.date = LocalDate.now();
-//        this.date = LocalDate.of(2024, 5,1);
-        this.checkInTime = LocalTime.of(8, 30);
         this.isPresent = true;
         this.notes = notes;
     }
 
     public void checkOut(String notes) {
         this.notes = notes;
-//        this.checkOutTime = LocalTime.now();
-        this.checkOutTime = LocalTime.of(23, 0);
+        this.checkOutTime = LocalTime.now();
         this.isPresent = false;
     }
 }
