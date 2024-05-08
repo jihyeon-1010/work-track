@@ -11,5 +11,5 @@
   |<img src="http://img.shields.io/badge/Tools / Test Code-e3e3e3?style=for-the-badge"/>| <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white" /> <img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=flat&logo=intellijidea&logoColor=white" />
   
   <h2>API 명세서</h2>
-  <a href="https://s-organization-274.gitbook.io/work-track-api/"><img src="https://img.shields.io/badge/GitBook-BBDDE5?style=flat&logo=gitbook&logoColor=black" target="_blank" /></a> <span style="font-size:25">← 링크 바로가기</span>
+  <a href="https://s-organization-274.gitbook.io/work-track-api/" target="_blank"><img src="https://img.shields.io/badge/GitBook-BBDDE5?style=flat&logo=gitbook&logoColor=black" /></a> <span style="font-size:25">← 링크 바로가기</span>
 </div>
