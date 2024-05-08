@@ -4,7 +4,7 @@
   
   |구분|상세내용
   |:----:|----
-  |<img src="http://img.shields.io/badge/Frontend-e3e3e3?style=for-the-badge"/>|<img src="https://img.shields.io/badge/React Native-61DAFB?style=flat&logo=React&logoColor=black" />
+  |<img src="http://img.shields.io/badge/Frontend-e3e3e3?style=for-the-badge"/>|<img src="https://img.shields.io/badge/React Native-61DAFB?style=flat&logo=React&logoColor=black" /> <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=black" />
   |<img src="http://img.shields.io/badge/Backend-e3e3e3?style=for-the-badge"/>| <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" /> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=springboot&logoColor=white" /> <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat&logo=springsecurity&logoColor=white" /> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat&logo=amazons3&logoColor=white" /> 
   |<img src="http://img.shields.io/badge/DB-e3e3e3?style=for-the-badge"/>| <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white" />
   |<img src="http://img.shields.io/badge/OS-e3e3e3?style=for-the-badge"/>| <img src="https://img.shields.io/badge/Windows 10-0078D6?style=flat&logo=windows10&logoColor=white" />
