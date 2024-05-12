@@ -27,7 +27,8 @@ public class Attendance {
 
     public Attendance(String employeeId, String notes) {
         this.employeeId = employeeId;
-        this.checkInTime = LocalTime.now();
+//        this.checkInTime = LocalTime.now();
+        this.checkInTime = LocalTime.of(9, 20);
         this.date = LocalDate.now();
         this.isPresent = true;
         this.notes = notes;
@@ -35,7 +36,8 @@ public class Attendance {
 
     public void checkOut(String notes) {
         this.notes = notes;
-        this.checkOutTime = LocalTime.now();
+//        this.checkOutTime = LocalTime.now();
+        this.checkOutTime = LocalTime.of(18, 0);
         this.isPresent = false;
     }
 }

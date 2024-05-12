@@ -10,9 +10,10 @@ public class MessageRequest {
     private String employeeId;
     private String channelsId;
     private String text;
+    private String image;
 
-    public Message toEntity(String text, Employee employee) {
-        return new Message(text, employee);
+    public Message toEntity(String text, String image, Employee employee) {
+        return new Message(text, image, employee);
     }
 
 }

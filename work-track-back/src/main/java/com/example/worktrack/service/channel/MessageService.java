@@ -8,8 +8,10 @@ import com.example.worktrack.entity.Message;
 import com.example.worktrack.repository.ChannelRepository;
 import com.example.worktrack.repository.EmployeeRepository;
 import com.example.worktrack.repository.MessageRepository;
+import com.example.worktrack.service.aws.AwsS3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +20,12 @@ public class MessageService {
     private final ChannelRepository channelRepository;
     private final EmployeeRepository employeeRepository;
     private final MessageRepository messageRepository;
+    private final AwsS3Service s3Service;
+
+    // 사진 업로드
+    public String uploadImage(String channelId, String employeeId, MultipartFile file) {
+        return s3Service.uploadImage(channelId, employeeId, file);
+    }
 
     // 메시지 저장
     public MessageResponse saveMessage(MessageRequest request) {
@@ -30,11 +38,12 @@ public class MessageService {
         Employee targetEmployee = employeeRepository.findById(request.getEmployeeId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 직원을 찾을 수 없습니다."));
 
-        // 3. 메시지 저장
-        Message message = request.toEntity(request.getText(), targetEmployee);
+
+        // 4. 메시지 저장
+        Message message = request.toEntity(request.getText(), request.getImage(), targetEmployee);
         Message saveMessage = messageRepository.save(message);
 
-        // 4. 채널에 메시지 컬렉션 저장
+        // 5. 채널에 메시지 컬렉션 저장
         targetChannel.addMessage(saveMessage);
         return new MessageResponse(channelRepository.save(targetChannel));
     }

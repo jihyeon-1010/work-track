@@ -1,15 +1,18 @@
 package com.example.worktrack.service.aws;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -52,6 +55,32 @@ public class AwsS3Service {
         } catch (IllegalArgumentException e) {
             // 잘못된 base64 데이터인 경우 예외 처리
             throw new IllegalArgumentException("잘못된 base64 데이터", e);
+        }
+    }
+
+    // 메신저 이미지 업로드
+    public String uploadImage(String channelId, String employeeId, MultipartFile file) {
+        String baseFileName = "image";
+        String fileExtension = ".png";
+        String directoryPath = channelId + "/" + employeeId + "/";
+
+        // 파일 이름에 타임스탬프 추가
+        long timestamp = System.currentTimeMillis();
+        String fileName = "image_" + timestamp + ".png";
+        String key = channelId + "/" + employeeId + "/" + fileName;
+
+        try {
+            // MultipartFile을 InputStream으로 변환하여 S3에 업로드
+            InputStream inputStream = file.getInputStream();
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentType(file.getContentType());
+            metadata.setContentLength(file.getSize());
+            amazonS3.putObject(new PutObjectRequest(bucketName, key, inputStream, metadata));
+
+            // 업로드한 이미지의 URL을 반환
+            return amazonS3.getUrl(bucketName, key).toString();
+        } catch (IOException e) {
+            throw new RuntimeException("이미지 업로드 실패", e);
         }
     }
 

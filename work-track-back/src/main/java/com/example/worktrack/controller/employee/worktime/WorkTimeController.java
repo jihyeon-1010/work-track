@@ -28,7 +28,7 @@ public class WorkTimeController {
     }
 
     // 퇴큰 처리
-    @PostMapping("check-out")
+    @PostMapping("/check-out")
     public ResponseEntity<CheckOutResponse> checkOut(@RequestBody AttendanceRequest request) {
         CheckOutResponse checkOut =  workTimeService.checkOut(request);
 
