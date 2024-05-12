@@ -29,14 +29,9 @@ public class MessageController {
 
     // 이미지 업로드
     @PostMapping("/upload-image")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("channelId") String channelId, @RequestParam("employeeId") String employeeId) {
-        try {
-            String imageUrl = messageService.uploadImage(channelId, employeeId, file);
-            return ResponseEntity.ok().body(imageUrl);
-        } catch (Exception e) {
-            log.error("Image upload failed", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Image upload failed");
-        }
+    public ResponseEntity<String> uploadImage(@RequestParam MultipartFile file, @RequestParam String channelId, @RequestParam String employeeId) {
+        String imageUrl = messageService.uploadImage(channelId, employeeId, file);
+        return ResponseEntity.status(HttpStatus.OK).body(imageUrl);
     }
 
 }
