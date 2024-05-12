@@ -31,6 +31,7 @@ public class MessageController {
     @PostMapping("/upload-image")
     public ResponseEntity<String> uploadImage(@RequestParam MultipartFile file, @RequestParam String channelId, @RequestParam String employeeId) {
         String imageUrl = messageService.uploadImage(channelId, employeeId, file);
+        
         return ResponseEntity.status(HttpStatus.OK).body(imageUrl);
     }
 
