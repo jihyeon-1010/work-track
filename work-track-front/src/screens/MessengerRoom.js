@@ -7,6 +7,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { ProgressContext } from '../contexts/Progress';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '../contexts';
+import * as ImagePicker from 'expo-image-picker';
+import { IconButton } from 'react-native-paper';
 
 const Container = styled.View`
     flex: 1;
@@ -52,6 +54,7 @@ const MessengerRoom = ({ navigation, route: { params } }) => {
     const { currentUser } = useContext(UserContext);
 
     const [messages, setMessages] = useState([]);
+    const [media, setMedia] = useState(null);
     const ws = useRef(null);
 
     useLayoutEffect(() => {
@@ -82,7 +85,8 @@ const MessengerRoom = ({ navigation, route: { params } }) => {
                     _id: msg.employee.id,
                     name: msg.employee.user.name,
                     avatar: msg.employee.user.profileUrl
-                }
+                },
+                image: msg.image
             }));
 
             // id 중복값 제거 및 상태 업데이트
@@ -105,20 +109,76 @@ const MessengerRoom = ({ navigation, route: { params } }) => {
             websocket.close();
         };
     }, []);  
-    
 
+    const createTimestampedURL = (url) => {
+        if (!url) return null; // 이미지 URL이 없는 경우 null 반환
+        const timestamp = new Date().getTime(); // 현재 시간의 타임스탬프
+        return `${url}?timestamp=${timestamp}`;
+    };
+
+    // 미디어 선택 아이콘
+    const renderAccessory = () => (
+        <IconButton
+            icon="camera"
+            size={24}
+            color="grey"
+            onPress={handleMediaPick}  
+        />
+    );
+
+    // 미디어 선택
+    const handleMediaPick = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            const uploadedImageUrl = await uploadImage(result.assets[0].uri);
+            setMedia(uploadedImageUrl);
+        }
+    };
+
+    // 사진 업로드
+    const uploadImage = async (imageUri) => {
+        const formData = new FormData();
+        formData.append('file', {
+            uri: imageUri,
+            type: 'image/jpeg', 
+            name: 'image.jpg',
+        });
+        formData.append('channelId', params.id);
+        formData.append('employeeId', currentUser.employeeId);
+
+        try {
+            const response = await axios.post('http://192.168.35.131:8080/message/upload-image', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log(response.data);
+            return response.data; 
+        } catch (error) {
+            console.error('Upload failed', error);
+        }
+    };
+    
     // 메시지 전송 처리 
-    const sendMessage = (messageList) => {
+    const sendMessage = async (messageList) => {
         const message = messageList[0];
 
         const messageData = {
             text: message.text,
             channelsId: params.id,
             employeeId: currentUser.employeeId,
+            image: media
         }
         
         if (ws.current && ws.current.readyState === WebSocket.OPEN) {
             ws.current.send(JSON.stringify(messageData));
+            setMedia(null);
         } else {
             console.error('웹 소켓이 연결되지 않음');
         }
@@ -143,8 +203,9 @@ const MessengerRoom = ({ navigation, route: { params } }) => {
                 user: {
                     _id: msg.employee.id,
                     name: msg.employee.user.name,
-                    avatar: msg.employee.user.profileUrl
-                }
+                    avatar: createTimestampedURL(msg.employee.user.profileUrl)
+                },
+                image: createTimestampedURL(msg.image)
             }));
             formattedMessages.sort((a, b) => b.createdAt - a.createdAt);
 
@@ -156,7 +217,7 @@ const MessengerRoom = ({ navigation, route: { params } }) => {
         finally {
             spinner.stop();
         }
-    }
+    };
     
     return (
         <Container>
@@ -187,6 +248,7 @@ const MessengerRoom = ({ navigation, route: { params } }) => {
                     <Avatar source={{ uri: props.currentMessage.user.avatar }} />
                 )}
                 inverted={true}
+                renderActions={renderAccessory}
             />
         </Container>
     );

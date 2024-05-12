@@ -41,5 +41,29 @@ export const _getDepartments = async () => {
     }
 }; 
 
+// ----------------------------- 이미지를 Base64로 변환 -----------------------------
+export const loadImageAsBase64 = async (filePath) => {
+    if (filePath.startsWith('https')) {
+        return filePath;
+    }
+    try {
+        const response = await fetch(filePath);
+        const blob = await response.blob();
+        
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onerror = reject;
+            reader.onload = () => {
+                const base64Data = reader.result.split(',')[1];
+                resolve(base64Data);
+            };
+            reader.readAsDataURL(blob);
+        });
+    } catch (error) {
+        console.error('이미지를 Base64로 변환하는 중 오류 발생: ', error);
+        throw new Error('이미지를 Base64로 변환하는 중 오류 발생');
+    }
+};
+
 
 
